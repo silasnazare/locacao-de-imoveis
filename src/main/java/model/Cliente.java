@@ -26,6 +26,10 @@ public class Cliente implements Serializable, Entidade {
     public Cliente() {
     }
 
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public Integer getId() {
         return id;
