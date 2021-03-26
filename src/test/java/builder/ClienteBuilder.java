@@ -4,7 +4,7 @@ import model.Cliente;
 
 public class ClienteBuilder {
     private Cliente cliente;
-    private static int contadorId = 1;
+    private static Integer contadorId = 1;
 
     public ClienteBuilder() {
     }

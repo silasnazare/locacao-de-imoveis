@@ -39,24 +39,12 @@ class ClienteRepositoryTest {
     void buscaPorNome() {
         assertThrows(NoResultException.class, () -> clientes.buscaPorNome("Silas Nazare"),"Deveria lançar a exceção NoResultException");
 
-        clientes.salva(new Cliente("Silas Nazare"));
+        clientes.salvaOuAtualiza(new Cliente("Silas Nazare"));
         manager.flush();
         manager.clear();
 
         Cliente clienteDoBanco = clientes.buscaPorNome("Silas Nazare");
 
         assertThat("Silas Nazare", is(equalTo(clienteDoBanco.getNome())));
-    }
-
-    @Test
-    void salva() {
-    }
-
-    @Test
-    void atualiza() {
-    }
-
-    @Test
-    void exclui() {
     }
 }

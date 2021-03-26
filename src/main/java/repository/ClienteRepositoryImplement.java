@@ -6,28 +6,32 @@ import javax.persistence.EntityManager;
 
 public class ClienteRepositoryImplement implements ClienteRepository {
     private EntityManager manager;
+    private DAO<Cliente> clienteDAO;
 
     public ClienteRepositoryImplement(EntityManager manager) {
         this.manager = manager;
+        this.clienteDAO = new DAO<Cliente>(manager);
+    }
+
+    @Override
+    public Cliente buscaPorId(Integer id) {
+        return clienteDAO.buscaPorId(Cliente.class, id);
     }
 
     @Override
     public Cliente buscaPorNome(String nome) {
-        return manager.createQuery("select c from Cliente c where c.nome = :pNome", Cliente.class).setParameter("pNome", nome).getSingleResult();
+        return clienteDAO.buscaPorNome(Cliente.class, nome);
+
     }
 
     @Override
-    public void salva(Cliente cliente) {
-        manager.persist(cliente);
+    public Cliente salvaOuAtualiza(Cliente cliente) {
+        return clienteDAO.salvaOuAtualiza(cliente);
     }
 
-    @Override
-    public void atualiza(Cliente cliente) {
-        manager.merge(cliente);
-    }
 
     @Override
-    public void exclui(Cliente cliente) {
-        manager.remove(cliente);
+    public void remove(Cliente cliente) {
+        clienteDAO.remove(cliente);
     }
 }
