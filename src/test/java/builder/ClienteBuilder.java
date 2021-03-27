@@ -4,17 +4,14 @@ import model.Cliente;
 
 public class ClienteBuilder {
     private Cliente cliente;
-    private static Integer contadorId = 1;
 
-    public ClienteBuilder() {
-    }
+    public ClienteBuilder() { }
 
-    public static ClienteBuilder umCliente() {
-        ClienteBuilder builder = new ClienteBuilder();
-        builder.cliente = new Cliente();
-        builder.cliente.setNome("Cliente 01");
-        builder.cliente.setId(contadorId++);
-        return builder;
+    public ClienteBuilder umCliente() {
+        ClienteBuilder clienteBuilder = new ClienteBuilder();
+        clienteBuilder.cliente = new Cliente();
+        clienteBuilder.cliente.setNome("Cliente");
+        return clienteBuilder;
     }
 
     public ClienteBuilder comNome(String nome) {

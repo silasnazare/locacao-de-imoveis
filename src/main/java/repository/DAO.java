@@ -1,6 +1,5 @@
 package repository;
 
-import model.Cliente;
 import model.Entidade;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,17 +13,11 @@ public class DAO<T extends Entidade>{
         this.manager = manager;
     }
 
-    Cliente buscaPorNome(Class<T> cClass, String nome) {
-            return manager.createQuery("select c from Cliente c where c.nome = :pNome", Cliente.class)
-                    .setParameter("pNome", nome)
-                    .getSingleResult();
-    }
-
     T buscaPorId(Class<T> cClass, Integer id) {
         return manager.find(cClass, id);
     }
 
-    T salvaOuAtualiza(@NotNull T t) {
+    T criaOuAtualiza(@NotNull T t) {
         if (Objects.isNull(t.getId())) {
             this.manager.persist(t);
         }

@@ -20,15 +20,13 @@ public class ClienteRepositoryImplement implements ClienteRepository {
 
     @Override
     public Cliente buscaPorNome(String nome) {
-        return clienteDAO.buscaPorNome(Cliente.class, nome);
-
+        return manager.createQuery("select c from Cliente c where c.nome = :pNome", Cliente.class).setParameter("pNome", nome).getSingleResult();
     }
 
     @Override
-    public Cliente salvaOuAtualiza(Cliente cliente) {
-        return clienteDAO.salvaOuAtualiza(cliente);
+    public Cliente criaOuAtualiza(Cliente cliente) {
+        return clienteDAO.criaOuAtualiza(cliente);
     }
-
 
     @Override
     public void remove(Cliente cliente) {
