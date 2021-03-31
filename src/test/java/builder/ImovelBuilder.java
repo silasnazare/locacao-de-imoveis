@@ -7,10 +7,10 @@ public class ImovelBuilder {
 
     public ImovelBuilder() { }
 
-    public ImovelBuilder umImovel() {
+    public static ImovelBuilder umImovel() {
         ImovelBuilder imovelBuilder = new ImovelBuilder();
         imovelBuilder.imovel = new Imovel();
-        imovelBuilder.imovel.setTipo("tipo");
+        imovelBuilder.imovel.setObservacoes("...");
         return imovelBuilder;
     }
 

@@ -1,8 +1,10 @@
 package repository;
 
+import model.Imovel;
 import model.Locacao;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class LocacaoRepositoryImplement implements LocacaoRepository {
     private EntityManager manager;
@@ -26,5 +28,11 @@ public class LocacaoRepositoryImplement implements LocacaoRepository {
     @Override
     public void remove(Locacao locacao) {
         locacaoDAO.remove(locacao);
+    }
+
+    @Override
+    public List<Imovel> imoveisDisponiveisPorEndereco(String endereco) {
+        return manager.createQuery("select i from Imovel i join Locacao l on l.imovel.id = i.id where l.ativo = false and i.endereco = :endereco", Imovel.class)
+                .setParameter("endereco", endereco).getResultList();
     }
 }

@@ -7,7 +7,7 @@ public class ClienteBuilder {
 
     public ClienteBuilder() { }
 
-    public ClienteBuilder umCliente() {
+    public static ClienteBuilder umCliente() {
         ClienteBuilder clienteBuilder = new ClienteBuilder();
         clienteBuilder.cliente = new Cliente();
         clienteBuilder.cliente.setNome("Cliente");
