@@ -26,6 +26,11 @@ public class LocacaoBuilder {
         return this;
     }
 
+    public LocacaoBuilder noValorDe(double valorDoAluguel) {
+        locacao.setValorDoAluguel(valorDoAluguel);
+        return this;
+    }
+
     public Locacao constroi() {
         return locacao;
     }

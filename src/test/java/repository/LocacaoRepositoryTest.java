@@ -1,9 +1,6 @@
 package repository;
 
-import builder.ClienteBuilder;
-import builder.ImovelBuilder;
 import builder.LocacaoBuilder;
-import model.Imovel;
 import model.Locacao;
 import org.junit.jupiter.api.*;
 
@@ -11,13 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 class LocacaoRepositoryTest {
     private EntityManager manager;
     private static EntityManagerFactory factory;
     private LocacaoRepository locacoes;
-    private ImovelRepository imoveis;
 
     @BeforeAll
     static void start() {
@@ -29,7 +27,6 @@ class LocacaoRepositoryTest {
         manager = factory.createEntityManager();
         manager.getTransaction().begin();
         locacoes = new LocacaoRepositoryImplement(manager);
-        imoveis = new ImovelRepositoryImplement(manager);
     }
 
     @AfterEach
@@ -43,24 +40,13 @@ class LocacaoRepositoryTest {
     }
 
     @Test
-    void imoveisDisponiveisPorEndereco() {
-        Imovel apartamentoCalhau1 = ImovelBuilder.umImovel().doTipo("Apartamento").noEndereco("Calhau").constroi();
-        Imovel apartamentoCalhau2 = ImovelBuilder.umImovel().doTipo("Apartamento").noEndereco("Calhau").constroi();
-        Imovel casaCalhau = ImovelBuilder.umImovel().doTipo("Casa").noEndereco("Calhau").constroi();
-        Locacao locacao1 = LocacaoBuilder.umaLocacao().deUmImovel(apartamentoCalhau1).constroi();
-        Locacao locacao2 = LocacaoBuilder.umaLocacao().deUmImovel(apartamentoCalhau2).constroi();
-        Locacao locacao3 = LocacaoBuilder.umaLocacao().deUmImovel(casaCalhau).constroi();
-
-        imoveis.criaOuAtualiza(apartamentoCalhau1);
-        imoveis.criaOuAtualiza(apartamentoCalhau2);
-        imoveis.criaOuAtualiza(casaCalhau);
-        locacoes.criaOuAtualiza(locacao1);
-        locacoes.criaOuAtualiza(locacao2);
-        locacoes.criaOuAtualiza(locacao3);
-        locacoes.imoveisDisponiveisPorEndereco("Calhau");
+    void buscaPorId() {
+        Locacao locacao = LocacaoBuilder.umaLocacao().constroi();
+        locacao.setId(100);
+        locacoes.criaOuAtualiza(locacao);
         manager.flush();
         manager.clear();
 
-        assertEquals("Calhau", casaCalhau.getEndereco());
+        assertThat(100, is(equalTo(locacao.getId())));
     }
 }

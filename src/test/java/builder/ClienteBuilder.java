@@ -10,7 +10,7 @@ public class ClienteBuilder {
     public static ClienteBuilder umCliente() {
         ClienteBuilder clienteBuilder = new ClienteBuilder();
         clienteBuilder.cliente = new Cliente();
-        clienteBuilder.cliente.setNome("Cliente");
+        clienteBuilder.cliente.setNome("...");
         return clienteBuilder;
     }
 

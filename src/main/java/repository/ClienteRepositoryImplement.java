@@ -20,7 +20,8 @@ public class ClienteRepositoryImplement implements ClienteRepository {
 
     @Override
     public Cliente buscaPorNome(String nome) {
-        return manager.createQuery("select c from Cliente c where c.nome = :pNome", Cliente.class).setParameter("pNome", nome).getSingleResult();
+        return manager.createQuery("select c from Cliente c where c.nome = :pNome", Cliente.class)
+                .setParameter("pNome", nome).getSingleResult();
     }
 
     @Override

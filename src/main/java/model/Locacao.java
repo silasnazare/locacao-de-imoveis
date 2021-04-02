@@ -2,7 +2,6 @@ package model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -20,17 +19,15 @@ public class Locacao implements Serializable, Entidade {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     @Column(name = "valor_aluguel")
-    private BigDecimal valorDoAluguel;
+    private double valorDoAluguel;
     @Column(name = "multa")
-    private BigDecimal multa;
+    private double multa;
     @Column(name = "dia_vencimento")
     private Integer diaDoVencimento;
     @Column(name = "inicio_contrato")
     private LocalDate inicioDoContrato;
     @Column(name = "final_contrato")
     private LocalDate finalDoContrato;
-    @Column(name = "ativo")
-    private boolean ativo;
     @Column(name = "observacoes")
     private String observacoes;
 
@@ -61,19 +58,19 @@ public class Locacao implements Serializable, Entidade {
         this.cliente = cliente;
     }
 
-    public BigDecimal getValorDoAluguel() {
+    public double getValorDoAluguel() {
         return valorDoAluguel;
     }
 
-    public void setValorDoAluguel(BigDecimal valorDoAluguel) {
+    public void setValorDoAluguel(double valorDoAluguel) {
         this.valorDoAluguel = valorDoAluguel;
     }
 
-    public BigDecimal getMulta() {
+    public double getMulta() {
         return multa;
     }
 
-    public void setMulta(BigDecimal multa) {
+    public void setMulta(double multa) {
         this.multa = multa;
     }
 
@@ -99,14 +96,6 @@ public class Locacao implements Serializable, Entidade {
 
     public void setFinalDoContrato(LocalDate finalDoContrato) {
         this.finalDoContrato = finalDoContrato;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getObservacoes() {

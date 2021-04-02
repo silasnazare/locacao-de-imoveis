@@ -24,6 +24,11 @@ public class ImovelBuilder {
         return this;
     }
 
+    public ImovelBuilder comOValorSugeridoDe(double valorSugerido) {
+        imovel.setValorSugerido(valorSugerido);
+        return this;
+    }
+
     public Imovel constroi() {
         return imovel;
     }

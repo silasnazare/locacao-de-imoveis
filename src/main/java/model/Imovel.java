@@ -27,6 +27,8 @@ public class Imovel implements Serializable, Entidade {
     private Integer vagasDeGaragem;
     @Column(name = "valor_sugerido")
     private double valorSugerido;
+    @Column(name = "ativo")
+    private boolean ativo;
     @Column(name = "observacoes")
     private String observacoes;
 
@@ -103,6 +105,14 @@ public class Imovel implements Serializable, Entidade {
 
     public void setValorSugerido(double valorSugerido) {
         this.valorSugerido = valorSugerido;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public String getObservacoes() {
