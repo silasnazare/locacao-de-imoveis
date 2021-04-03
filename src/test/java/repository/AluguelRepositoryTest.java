@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -101,19 +102,30 @@ class AluguelRepositoryTest {
     }
 
     @Test
-    void naoDeveAlugarValorMenorQueOContratado() {
-        Cliente silas = ClienteBuilder.umCliente().comNome("Silas").constroi();
-        Imovel casaCentro = ImovelBuilder.umImovel().doTipo("casa").noEndereco("Centro").constroi();
-        Locacao locacao = LocacaoBuilder.umaLocacao().deUmImovel(casaCentro).paraUmCliente(silas).noValorDe(1000.00).constroi();
-        Aluguel janeiro = AluguelBuilder.umAluguel().comValorPagoDe(1000.00).constroi();
-        clientes.criaOuAtualiza(silas);
-        imoveis.criaOuAtualiza(casaCentro);
+    void vericaValorDoAluguel() {
+        Locacao locacao = LocacaoBuilder.umaLocacao().noValorDe(1000).constroi();
+        Aluguel janeiro = AluguelBuilder.umAluguel().paraALocacao(locacao).constroi();
+
         locacoes.criaOuAtualiza(locacao);
         alugueis.criaOuAtualiza(janeiro);
         manager.clear();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> janeiro.setValorPago(999.90), "Deveria ter lançado um IllegalArgumentException");
+        double valorPago = alugueis.verificaValorDoAluguel(janeiro, 1000);
 
-        Assertions.assertTrue(exception.getMessage().contains("O valor é menor que o valor sugerido."));
+        Assertions.assertEquals(1000, valorPago);
+    }
+
+    @Test
+    void calculaMulta() {
+        Locacao locacao = LocacaoBuilder.umaLocacao().noValorDe(1000).comVencimentoEm(LocalDate.now()).comMultaDe(0.33).constroi();
+        Aluguel janeiro = AluguelBuilder.umAluguel().paraALocacao(locacao).comPagamentoEm(LocalDate.of(2021, 4, 4)).constroi();
+
+        locacoes.criaOuAtualiza(locacao);
+        alugueis.criaOuAtualiza(janeiro);
+        manager.clear();
+
+        double multa = alugueis.calculaMulta(janeiro);
+
+        Assertions.assertEquals(1660, multa);
     }
 }

@@ -4,6 +4,8 @@ import model.Cliente;
 import model.Imovel;
 import model.Locacao;
 
+import java.time.LocalDate;
+
 public class LocacaoBuilder {
     private Locacao locacao;
 
@@ -28,6 +30,16 @@ public class LocacaoBuilder {
 
     public LocacaoBuilder noValorDe(double valorDoAluguel) {
         locacao.setValorDoAluguel(valorDoAluguel);
+        return this;
+    }
+
+    public LocacaoBuilder comMultaDe(double multa) {
+        locacao.setMulta(multa);
+        return this;
+    }
+
+    public LocacaoBuilder comVencimentoEm(LocalDate dataDoVencimento) {
+        locacao.setDataDoVencimento(dataDoVencimento);
         return this;
     }
 

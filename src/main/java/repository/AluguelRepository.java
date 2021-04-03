@@ -2,6 +2,7 @@ package repository;
 
 import model.Aluguel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AluguelRepository {
@@ -10,4 +11,6 @@ public interface AluguelRepository {
     void remove(Aluguel aluguel);
     List<Aluguel> buscaAlugueisPagosPorNomeDoCliente(String nome);
     List<Aluguel> buscaAlugueisEmAtraso(String nome);
+    double verificaValorDoAluguel(Aluguel aluguel, double valor);
+    double calculaMulta(Aluguel aluguel);
 }

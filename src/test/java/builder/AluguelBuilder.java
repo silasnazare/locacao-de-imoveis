@@ -23,6 +23,11 @@ public class AluguelBuilder {
         return this;
     }
 
+    public AluguelBuilder comPagamentoEm(LocalDate dataDePagamento) {
+        aluguel.setDataDePagamento(dataDePagamento);
+        return this;
+    }
+
     public AluguelBuilder paraALocacao(Locacao locacao) {
         aluguel.setLocacao(locacao);
         return this;

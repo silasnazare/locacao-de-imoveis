@@ -22,8 +22,8 @@ public class Locacao implements Serializable, Entidade {
     private double valorDoAluguel;
     @Column(name = "multa")
     private double multa;
-    @Column(name = "dia_vencimento")
-    private Integer diaDoVencimento;
+    @Column(name = "data_vencimento")
+    private LocalDate dataDoVencimento;
     @Column(name = "inicio_contrato")
     private LocalDate inicioDoContrato;
     @Column(name = "final_contrato")
@@ -74,12 +74,12 @@ public class Locacao implements Serializable, Entidade {
         this.multa = multa;
     }
 
-    public Integer getDiaDoVencimento() {
-        return diaDoVencimento;
+    public LocalDate getDataDoVencimento() {
+        return dataDoVencimento;
     }
 
-    public void setDiaDoVencimento(Integer diaDoVencimento) {
-        this.diaDoVencimento = diaDoVencimento;
+    public void setDataDoVencimento(LocalDate dataDoVencimento) {
+        this.dataDoVencimento = dataDoVencimento;
     }
 
     public LocalDate getInicioDoContrato() {

@@ -44,9 +44,6 @@ public class Aluguel implements Serializable, Entidade {
     }
 
     public void setValorPago(double valorPago) {
-        if (valorPago < locacao.getValorDoAluguel()) {
-            throw new IllegalArgumentException("O valor é menor que o valor sugerido.");
-        }
         this.valorPago = valorPago;
     }
 

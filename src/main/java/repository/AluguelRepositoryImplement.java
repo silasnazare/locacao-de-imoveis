@@ -6,6 +6,7 @@ import model.Locacao;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AluguelRepositoryImplement implements AluguelRepository {
@@ -46,5 +47,30 @@ public class AluguelRepositoryImplement implements AluguelRepository {
         TypedQuery<Aluguel> aluguelTypedQuery = manager.createQuery(jpql, Aluguel.class);
         List<Aluguel> aluguelList = aluguelTypedQuery.setParameter("nome", nome).setParameter("hoje", LocalDate.now()).getResultList();
         return aluguelList;
+    }
+
+    @Override
+    public double verificaValorDoAluguel(Aluguel aluguel, double valor) {
+        if (valor < aluguel.getLocacao().getValorDoAluguel()) {
+            throw new IllegalArgumentException("Valor abaixo do sugerido. Tente outro valor");
+        }
+        else {
+            aluguel.setValorPago(valor);
+        }
+        return aluguel.getValorPago();
+    }
+    @Override
+    public double calculaMulta(Aluguel aluguel) {
+        long diasDeAtraso = aluguel.getLocacao().getDataDoVencimento().until(aluguel.getDataDePagamento(), ChronoUnit.DAYS);
+        if (diasDeAtraso <= 0)
+            throw new IllegalArgumentException("Data inválida! Tente novamente!");
+        double valorTotal = aluguel.getLocacao().getValorDoAluguel() + (aluguel.getLocacao().getValorDoAluguel() * (aluguel.getLocacao().getMulta() * diasDeAtraso));
+        if (valorTotal > (aluguel.getLocacao().getValorDoAluguel() * 1.8)) {
+            aluguel.setValorPago((aluguel.getLocacao().getValorDoAluguel() * 1.8));
+        }
+        else{
+            aluguel.setValorPago(valorTotal);
+        }
+        return aluguel.getValorPago();
     }
 }
