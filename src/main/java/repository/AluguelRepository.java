@@ -12,6 +12,6 @@ public interface AluguelRepository {
     List<Aluguel> buscaAlugueisPagosPorNomeDoCliente(String nome);
     List<Aluguel> buscaAlugueisEmAtrasoPorNomeDoCliente(String nome);
     List<Aluguel> buscaTodosOsAlugueisEmAtraso();
-    double verificaValorDoAluguel(Aluguel aluguel, double valor);
-    double calculaMulta(Aluguel aluguel);
+    //double verificaValorDoAluguel(Aluguel aluguel, double valor);
+    //double calculaMulta(Aluguel aluguel);
 }

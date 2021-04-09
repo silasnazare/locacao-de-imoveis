@@ -57,7 +57,7 @@ public class AluguelRepositoryImplement implements AluguelRepository {
         return aluguelList;
     }
 
-    @Override
+    /*@Override
     public double verificaValorDoAluguel(Aluguel aluguel, double valor) {
         if (valor < aluguel.getLocacao().getValorDoAluguel()) {
             throw new IllegalArgumentException("Valor abaixo do sugerido. Tente outro valor");
@@ -66,8 +66,9 @@ public class AluguelRepositoryImplement implements AluguelRepository {
             aluguel.setValorPago(valor);
         }
         return aluguel.getValorPago();
-    }
-    @Override
+    }*/
+
+    /*@Override
     public double calculaMulta(Aluguel aluguel) {
         long diasDeAtraso = aluguel.getLocacao().getDataDoVencimento().until(aluguel.getDataDePagamento(), ChronoUnit.DAYS);
         if (diasDeAtraso <= 0)
@@ -80,5 +81,5 @@ public class AluguelRepositoryImplement implements AluguelRepository {
             aluguel.setValorPago(valorTotal);
         }
         return aluguel.getValorPago();
-    }
+    }*/
 }

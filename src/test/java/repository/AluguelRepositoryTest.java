@@ -101,7 +101,7 @@ class AluguelRepositoryTest {
         Assertions.assertEquals(1, listaAlugueis.size());
     }
 
-    @Test
+    /*@Test
     void vericaValorDoAluguel() {
         Locacao locacao = LocacaoBuilder.umaLocacao().noValorDe(1000).constroi();
         Aluguel janeiro = AluguelBuilder.umAluguel().paraALocacao(locacao).constroi();
@@ -113,9 +113,9 @@ class AluguelRepositoryTest {
         double valorPago = alugueis.verificaValorDoAluguel(janeiro, 1000);
 
         Assertions.assertEquals(1000, valorPago);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void calculaMulta() {
         Locacao locacao = LocacaoBuilder.umaLocacao().noValorDe(1000).comVencimentoEm(LocalDate.now()).comMultaDe(0.33).constroi();
         Aluguel janeiro = AluguelBuilder.umAluguel().paraALocacao(locacao).comPagamentoEm(LocalDate.of(2021, 4, 4)).constroi();
@@ -127,5 +127,5 @@ class AluguelRepositoryTest {
         double multa = alugueis.calculaMulta(janeiro);
 
         Assertions.assertEquals(1660, multa);
-    }
+    }*/
 }
