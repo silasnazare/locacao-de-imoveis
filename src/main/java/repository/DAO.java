@@ -1,7 +1,6 @@
 package repository;
 
 import model.Entidade;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.EntityManager;
 import java.util.Objects;
@@ -17,7 +16,7 @@ public class DAO<T extends Entidade>{
         return manager.find(cClass, id);
     }
 
-    T criaOuAtualiza(@NotNull T t) {
+    T criaOuAtualiza(T t) {
         if (Objects.isNull(t.getId())) {
             this.manager.persist(t);
         }

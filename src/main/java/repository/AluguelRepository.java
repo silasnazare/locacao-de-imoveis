@@ -10,7 +10,8 @@ public interface AluguelRepository {
     Aluguel criaOuAtualiza(Aluguel aluguel);
     void remove(Aluguel aluguel);
     List<Aluguel> buscaAlugueisPagosPorNomeDoCliente(String nome);
-    List<Aluguel> buscaAlugueisEmAtraso(String nome);
+    List<Aluguel> buscaAlugueisEmAtrasoPorNomeDoCliente(String nome);
+    List<Aluguel> buscaTodosOsAlugueisEmAtraso();
     double verificaValorDoAluguel(Aluguel aluguel, double valor);
     double calculaMulta(Aluguel aluguel);
 }

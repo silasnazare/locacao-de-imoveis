@@ -42,10 +42,18 @@ public class AluguelRepositoryImplement implements AluguelRepository {
     }
 
     @Override
-    public List<Aluguel> buscaAlugueisEmAtraso(String nome) {
+    public List<Aluguel> buscaAlugueisEmAtrasoPorNomeDoCliente(String nome) {
         String jpql = "select a from Aluguel a join a.locacao l join l.cliente c where c.nome = :nome and a.dataDePagamento < :hoje";
         TypedQuery<Aluguel> aluguelTypedQuery = manager.createQuery(jpql, Aluguel.class);
         List<Aluguel> aluguelList = aluguelTypedQuery.setParameter("nome", nome).setParameter("hoje", LocalDate.now()).getResultList();
+        return aluguelList;
+    }
+
+    @Override
+    public List<Aluguel> buscaTodosOsAlugueisEmAtraso() {
+        String jpql = "select a from Aluguel a join a.locacao l where a.dataDePagamento < :hoje";
+        TypedQuery<Aluguel> aluguelTypedQuery = manager.createQuery(jpql, Aluguel.class);
+        List<Aluguel> aluguelList = aluguelTypedQuery.setParameter("hoje", LocalDate.now()).getResultList();
         return aluguelList;
     }
 

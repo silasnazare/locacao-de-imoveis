@@ -83,7 +83,7 @@ class AluguelRepositoryTest {
     }
 
     @Test
-    void buscaAlugueisEmAtraso() {
+    void buscaAlugueisEmAtrasoPorNome() {
         Cliente silas = ClienteBuilder.umCliente().comNome("Silas").constroi();
         Imovel casaCentro = ImovelBuilder.umImovel().doTipo("casa").noEndereco("Centro").constroi();
         Locacao locacao = LocacaoBuilder.umaLocacao().deUmImovel(casaCentro).paraUmCliente(silas).constroi();
@@ -96,7 +96,7 @@ class AluguelRepositoryTest {
         alugueis.criaOuAtualiza(fevereiro);
         manager.clear();
 
-        List<Aluguel> listaAlugueis = alugueis.buscaAlugueisEmAtraso("Silas");
+        List<Aluguel> listaAlugueis = alugueis.buscaAlugueisEmAtrasoPorNomeDoCliente("Silas");
 
         Assertions.assertEquals(1, listaAlugueis.size());
     }
